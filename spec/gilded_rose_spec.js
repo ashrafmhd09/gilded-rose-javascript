@@ -55,8 +55,8 @@ describe("Gilded Rose,", function() {
     it("for +5 Dexterity Vest", function() {
       for(let i=0;i<gilded_rose.items.length;i++) {
         if (gilded_rose.items[i].name == "+5 Dexterity Vest") {
-          assert(gilded_rose.items[i].sell_in > 10)
-          assert(gilded_rose.items[i].quality > 20)
+          assert(gilded_rose.items[i].sell_in < 10)
+          assert(gilded_rose.items[i].quality < 20)
         }
       }
     });
