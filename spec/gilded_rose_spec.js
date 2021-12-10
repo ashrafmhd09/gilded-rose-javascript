@@ -18,7 +18,7 @@ describe("Gilded Rose,", function() {
     it("Aged Brie", function() {
       for(let i=0;i<gilded_rose.items.length;i++) {
         if (gilded_rose.items[i].name == "Aged Brie") {
-          assert(gilded_rose.items[i].name != "Aged Brie");
+          assert(gilded_rose.items[i].name == "Aged Brie");
         }
       }
     });
