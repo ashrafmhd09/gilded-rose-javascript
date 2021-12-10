@@ -29,5 +29,12 @@ describe("Gilded Rose,", function() {
         }
       }
     });
+    it("Sulfuras, Hand of Ragnaros", function() {
+      for(let i=0;i<gilded_rose.items.length;i++) {
+        if(gilded_rose.items[i].name == "Sulfuras, Hand of Ragnaros") {
+          assert(gilded_rose.items[i].name != "Sulfuras, Hand of Ragnaros");
+        }
+      }
+    });
   });
 });
