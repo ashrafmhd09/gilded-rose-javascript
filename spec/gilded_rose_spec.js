@@ -6,7 +6,7 @@ describe("Gilded Rose,", function() {
   gilded_rose.update_quality();
   describe("has", function() {
     it("items in the inventory", function() {
-      assert(gilded_rose.items.length < 0);
+      assert(gilded_rose.items.length > 0);
     });
   });
 });
