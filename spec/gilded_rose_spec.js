@@ -84,5 +84,13 @@ describe("Gilded Rose,", function() {
         }
       }
     });
+    it("for Backstage passes to a TAFKAL80ETC concert sell_in decrease, quality increase", function() {
+      for(let i=0;i<gilded_rose.items.length;i++) {
+        if (gilded_rose.items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
+          assert(gilded_rose.items[i].sell_in > 15);
+          assert(gilded_rose.items[i].quality < 20);
+        }
+      }  
+    });
   });
 });
