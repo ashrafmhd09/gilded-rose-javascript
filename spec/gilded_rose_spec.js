@@ -143,7 +143,7 @@ describe("Gilded Rose,", function() {
       it("for +5 Dexterity Vest", function() {
         for(let i=0;i<gilded_rose.items.length;i++) {
           if (gilded_rose.items[i].name == "+5 Dexterity Vest") {
-            if (gilded_rose.items[i].sell_in > 0) {
+            if (gilded_rose.items[i].sell_in < 0) {
               assert(gilded_rose.items[i].quality == (gilded_rose.items[i].quality-2));
             }
           }
