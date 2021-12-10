@@ -157,7 +157,17 @@ describe("Gilded Rose,", function() {
             }
           }
         }
-      })
+      });
+    });
+  });
+  // specific items in our inventory needs special interest
+  describe("Conjured Mana Cake,", function() {
+    it("decreases twice as fast as normal items", function() {
+      for(let i=0;i<gilded_rose.items.length;i++) {
+        if (gilded_rose.items[i]["name"] == "Conjured Mana Cake") {
+          assert(gilded_rose.items[i].quality == (gilded_rose.items[i].quality-2));
+        }
+      }
     });
   });
 });
