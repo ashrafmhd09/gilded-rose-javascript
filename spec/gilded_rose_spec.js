@@ -190,4 +190,13 @@ describe("Gilded Rose,", function() {
       }
     });
   });
+  describe("Aged Brie", function() {
+    it("increase in quality as it gets older", function() {
+      for(let i=0;i<gilded_rose.items.length;i++) {
+        if (gilded_rose.items[i].name == "Aged Brie") {
+          assert(gilded_rose.items[i].quality < 0);
+        }
+      }
+    })
+  })
 });
