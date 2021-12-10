@@ -170,5 +170,15 @@ describe("Gilded Rose,", function() {
       }
     });
   });
+  describe("Sulfuras is legendary item,", function() {
+    it("does not change at all", function() {
+      for(let i=0;i<gilded_rose.items.length;i++) {
+        if (gilded_rose.items[i].name == "Sulfuras, Hand of Ragnaros") {
+          assert(gilded_rose.items[i].sell_in > 0);
+          assert(gilded_rose.items[i].quality > 80);
+        }
+      }
+    })
+  });
 
 });
