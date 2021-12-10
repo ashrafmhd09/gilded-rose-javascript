@@ -184,8 +184,8 @@ describe("Gilded Rose,", function() {
     it("increases in quality as sell_in decreases", function() {
       for(var i=0;i<gilded_rose.items.length;i++) {
         if (gilded_rose.items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
-          assert(gilded_rose.items[i].sell_in > 15);
-          assert(gilded_rose.items[i].quality < 20);
+          assert(gilded_rose.items[i].sell_in < 15);
+          assert(gilded_rose.items[i].quality > 20);
         }
       }
     });
