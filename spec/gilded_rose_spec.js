@@ -165,9 +165,10 @@ describe("Gilded Rose,", function() {
     it("decreases twice as fast as normal items", function() {
       for(let i=0;i<gilded_rose.items.length;i++) {
         if (gilded_rose.items[i]["name"] == "Conjured Mana Cake") {
-          assert(gilded_rose.items[i].quality == (gilded_rose.items[i].quality-2));
+          assert(gilded_rose.items[i].quality == 4);
         }
       }
     });
   });
+
 });
