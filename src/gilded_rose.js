@@ -13,57 +13,105 @@ items.push(new Item('Sulfuras, Hand of Ragnaros', 0, 80));
 items.push(new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20));
 items.push(new Item('Conjured Mana Cake', 3, 6));
 
-function update_quality() {
-  for (var i = 0; i < items.length; i++) {
-    if (items[i].name != 'Aged Brie' && items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-      if (items[i].quality > 0) {
-        if (items[i].name != 'Sulfuras, Hand of Ragnaros') {
-          items[i].quality = items[i].quality - 1
-        }
-      }
-    } else {
-      if (items[i].quality < 50) {
-        items[i].quality = items[i].quality + 1
-        if (items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-          if (items[i].sell_in < 11) {
-            if (items[i].quality < 50) {
-              items[i].quality = items[i].quality + 1
-            }
-          }
-          if (items[i].sell_in < 6) {
-            if (items[i].quality < 50) {
-              items[i].quality = items[i].quality + 1
-            }
-          }
-        }
-      }
-    }
-    if (items[i].name != 'Sulfuras, Hand of Ragnaros') {
-      items[i].sell_in = items[i].sell_in - 1;
-    }
-    if (items[i].sell_in < 0) {
-      if (items[i].name != 'Aged Brie') {
-        if (items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-          if (items[i].quality > 0) {
-            if (items[i].name != 'Sulfuras, Hand of Ragnaros') {
-              items[i].quality = items[i].quality - 1
-            }
-          }
-        } else {
-          items[i].quality = items[i].quality - items[i].quality
-        }
-      } else {
-        if (items[i].quality < 50) {
-          items[i].quality = items[i].quality + 1
-        }
-      }
+function isNotAgedBrie(item) {
+  if (item.name != "Aged Brie") {
+    return item.name;
+  }
+}
+
+function isNotSulfuras(item) {
+  if (item.name != "Sulfuras, Hand of Ragnaros") {
+    return item.name;
+  }
+}
+
+function isNotBackstage(item) {
+  if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {
+    return item.name;
+  }
+}
+
+function isQualityLessThan50(item) {
+  return item.quality < 50;
+}
+
+function isQualityGreaterThan0(item) {
+  return item.quality > 0;
+}
+
+function isSellInLessThan11(item) {
+  return item.sell_in < 11;
+}
+
+function isSellInLessThan6(item) {
+  return item.sell_in < 6;
+}
+
+function isSellInLessThan0(item) {
+  return item.sell_in < 0;
+}
+
+function whenQualityGreaterThanZero(item) {
+  if (isQualityGreaterThan0(item)) {
+    if ((isNotSulfuras(item))) {
+      item.quality = item.quality - 1;
     }
   }
 }
 
-update_quality();
+function whenQualityLessThan50(item) {
+  if (isQualityLessThan50(item)) {
+    item.quality = item.quality + 1;
+  }
+}
+
+function whenConcertIsDone(item) {
+  item.quality = item.quality - item.quality;
+}
+
+function BackstageActivity(item) {
+  if (isSellInLessThan11(item)) {
+    whenQualityLessThan50(item);
+  }
+  if (isSellInLessThan6(item)) {
+    whenQualityLessThan50(item);
+  }
+}
+
+function whenSellInLessThanZero(item) {
+  if ((isNotAgedBrie(item))) {
+    if ((isNotBackstage(item))) {
+      whenQualityGreaterThanZero(item);
+    } else {
+      whenConcertIsDone(item);
+    }
+  } else {
+    whenQualityLessThan50(item);
+  }
+}
+
+function updateQuality() {
+  items.map(function(item) {
+    if (isNotAgedBrie(item) && isNotBackstage(item)) {
+      whenQualityGreaterThanZero(item);
+    } else {
+      if (isQualityLessThan50(item)) {
+        item.quality = item.quality + 1;
+        BackstageActivity(item);
+      }
+    }
+    if (isNotSulfuras(item)) {
+      item.sell_in = item.sell_in - 1;
+    }
+    if (isSellInLessThan0(item)) {
+      whenSellInLessThanZero(item);
+    }
+  });
+}
+
+updateQuality();
 
 module.exports.items = items;
 
-module.exports.update_quality = update_quality;
+module.exports.update_quality = updateQuality;
 
